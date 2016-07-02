@@ -1,0 +1,36 @@
+
+    public $db = 'mysql:host=crud-box-1;dbname=tutub';
+    public $password = 'password';
+    public $dbname = 'tutub';
+
+    public function dbconnect($db, $username, $password) {
+        $dbh = new PDO($db, $username, $password);
+    }
+
+    public function dbdisconnect($dbh) {
+
+    }
+
+    public /**
+     * @return string
+     */
+    public function getDb()
+    {
+        return $this->db;
+
+   }
+
+       public function dbconnect($db, $username, $password) {
+           $dbh = new PDO($db, $username, $password);
+       }
+       // Create Connection
+       try {
+           $dbh = new PDO('mysql:host=crud-box-1;dbname=tutub', $username, $password);
+           foreach ($dbh->query('SELECT * FROM customers') as $row) {
+               print_r($row);
+           }
+           $dbh = null;
+       } catch (PDOException $e) {
+           print "Error!: " . $e->getMessage() . "<br/)";
+           die();
+       }

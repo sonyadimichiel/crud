@@ -1,0 +1,33 @@
+<span style="font-weight: bold;color: darkolivegreen;font-size: 1.1em;">
+  Objects & Methods
+</span>
+<hr>
+<p id="car-item"></p>
+<p id="car-fullname"></p>
+<p id="car-changespec"></p>
+
+<script>
+  var car = {
+    type: "Fiat",
+    model: 500,
+    color: "white",
+    specs: function() {
+      return this.type + ", " + this.model + ", " + this.color;
+    }
+  };
+  document.getElementById("car-item").innerHTML = "My car is a " + car.type + " coloured " + car.color + ".";
+  document.getElementById("car-fullname").innerHTML = "Car Specifications: " + car.specs();
+
+  function carSpecs(type, model, color) {
+    this.type = type;
+    this.model = model;
+    this.color = color;
+    this.changeType = function(newType) {
+      this.type = newType;
+    }
+  }
+  var myCar = new carSpecs("Fiat", 500, "white");
+  myCar.changeType("Porsche");
+  document.getElementById("car-changespec").innerHTML = "My car is " + myCar.type;
+
+</script>

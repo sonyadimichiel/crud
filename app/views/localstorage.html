@@ -1,0 +1,128 @@
+<div>
+  <span style="color:darkolivegreen;font-weight:bold;font-size:1.2em;">
+    Personal Details using localStorage for String
+  </span>
+  <div id="firstname"></div>
+  <div id="lastname"></div>
+  <div id="dob"></div>
+  <div id="address"></div>
+  <div id="mobile"></div>
+
+  <span style="color:darkolivegreen;font-weight:bold;font-size:1.2em;">
+    Personal Details using localStorage for Array & JSON
+  </span>
+  <div id="display-usingarray"></div>
+  <p></p>
+  <span style="color:darkolivegreen;font-weight:bold;font-size:1.2em;">
+    Username, email and password local storage
+  </span>
+  <div id="display-user"></div>
+  <div id="display-JSON-parse"></div>
+<p></p>
+</div>
+  <script>
+    // localStorage: string
+    //Check browser support
+    if (typeof(Storage) !== "undefined") {
+      //Store
+      localStorage.setItem("firstname", "Sonya");
+      localStorage.setItem("lastname", "Di Michiel");
+      localStorage.setItem("dob", "19-05-1972");
+      localStorage.setItem("address", "8/53 Pennant Avenue Denistone NSW 2114");
+      localStorage.setItem("mobile", "0423211106");
+      //Retrieve
+      document.getElementById("firstname").innerHTML = localStorage.getItem("firstname");
+      document.getElementById("lastname").innerHTML = localStorage.getItem("lastname");
+      document.getElementById("dob").innerHTML = localStorage.getItem("dob");
+      document.getElementById("address").innerHTML = localStorage.getItem("address");
+      document.getElementById("mobile").innerHTML = localStorage.getItem("mobile");
+    } else {
+      document.getElementById("firstname").innerHTML = "Sorry, your browser does not support Web Storage ...";
+    }
+
+    // localStorage: array
+    var names =[];
+    // names[0] = prompt("New member name?");
+    names[0] = "Sonya";
+    names[1] = "Di Michiel";
+    names[2] = "19-05-1972";
+    names[3] = "8/53 Pennant Avenue Denistone NSW 2114";
+    names[4] = "0423211106";
+    localStorage["names"] = JSON.stringify(names);
+    var storedNames = JSON.parse(localStorage["names"]);
+    // Can use storedNames[0] etc.
+    document.getElementById("display-usingarray").innerHTML = storedNames;
+
+    // localStorage: user object
+    var systemusers = [];
+
+    var user1 = {
+      user: 'Sonya',
+      email: 'yellow.pen@icloud.com',
+      password: 'password2'
+    };
+
+    var user2 = {
+      user: 'Scott',
+      email: 'yellow.pen@icloud.com',
+      password: 'password2'
+    }
+
+    systemusers.push(user1);
+    systemusers.push(user2);
+
+    for(var i = 0; i < systemusers.length; i++) {
+      document.getElementById("display-user").innerHTML = systemusers[i].user;
+    }
+
+    var text = '{"employees":[' +
+      '{"firstName":"John","lastName":"Doe" },' +
+      '{"firstName":"Anna","lastName":"Smith" },' +
+      '{"firstName":"Peter","lastName":"Jones" }]}';
+
+    obj = JSON.parse(text);
+    document.getElementById("display-JSON-parse").innerHTML =
+      obj.employees[0].firstName + " " + obj.employees[0].lastName;
+
+    var me = {name: 'Sonya', age: '21', gender: 'F'};
+    localStorage.setItem("user", JSON.stringify(me));
+    var data = JSON.parse(localStorage.getItem("user"));
+
+    var list = {id: "1", stock: "BHP"};
+    localStorage['watchlist'] = JSON.stringify(list);
+    var StockDog = JSON.parse(localStorage['watchlist']);
+    //localStorage.clear();
+
+    // Go through localStorage
+    //for(var i = 0; i <= localStorage.length-1; i++) {
+    //  key=localStorage.key(i);
+    //  alert(localStorage.getItem(key));
+    //}
+
+    localStorage['userlist'] = JSON.stringify({username: "Sonya", email: "yellow.pen@icloud.com", password: 'password'});
+    var UserDataStore = JSON.parse(localStorage['userlist']);
+
+    // Go through localStorage to find Sonya
+    for(var i = 0; i <= localStorage.length-1; i++) {
+      key=localStorage.key(i);
+      alert(localStorage.getItem(key));
+    }
+
+    // Loading to local storage for testing
+    localStorage.clear();
+    var listOfUsers = [
+      {
+        username: 'sonya',
+        password: 'sonya'
+      }, {
+        username: 'scott',
+        password: 'scott'
+      }, {
+        username: 'billy',
+        password: 'billy'
+      }];
+
+    localStorage['UserDS.userlist'] = JSON.stringify(listOfUsers);
+
+  </script>
+</div>
